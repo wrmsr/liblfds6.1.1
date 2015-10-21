@@ -1,6 +1,10 @@
 #include "lfds611_abstraction_internal_wrapper.h"
 
 
+typedef void *(*malloc_impl)(size_t sz);
+malloc_impl lfds611_abstraction_malloc_impl = (malloc_impl) malloc;
+
+
 
 
 
@@ -14,7 +18,7 @@
 
   void *lfds611_abstraction_malloc( size_t size )
   {
-    return( malloc(size) );
+    return( lfds611_abstraction_malloc_impl(size) );
   }
 
 #endif

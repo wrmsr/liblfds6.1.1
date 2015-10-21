@@ -2,10 +2,14 @@
 
 
 
+void lfds611_queue_delete( struct lfds611_queue_state *qs, void (*user_data_delete_function)(void *user_data, void *user_state), void *user_state )
+{
+  return lfds611_queue_delete_with_freelist(  qs, user_data_delete_function, user_state, 1 );
+}
 
 
 /****************************************************************************/
-void lfds611_queue_delete( struct lfds611_queue_state *qs, void (*user_data_delete_function)(void *user_data, void *user_state), void *user_state )
+void lfds611_queue_delete_with_freelist( struct lfds611_queue_state *qs, void (*user_data_delete_function)(void *user_data, void *user_state), void *user_state, lfds611_atom_t delete_freelist )
 {
   void
     *user_data;
@@ -29,7 +33,8 @@ void lfds611_queue_delete( struct lfds611_queue_state *qs, void (*user_data_dele
 
   lfds611_freelist_push( qs->fs, qs->enqueue[LFDS611_QUEUE_POINTER]->fe );
 
-  lfds611_freelist_delete( qs->fs, lfds611_queue_internal_freelist_delete_function, NULL );
+  if( delete_freelist )
+    lfds611_freelist_delete( qs->fs, lfds611_queue_internal_freelist_delete_function, NULL );
 
   lfds611_liblfds_aligned_free( qs );
 

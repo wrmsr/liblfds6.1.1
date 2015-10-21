@@ -55,3 +55,5 @@ lfds611_stack_push = lfds611_stack_push @47
 lfds611_stack_query = lfds611_stack_query @48
 lfds611_stack_use = lfds611_stack_use @49
 
+lfds611_abstraction_malloc_impl = lfds611_abstraction_malloc_impl @50
+lfds611_abstraction_free_impl = lfds611_abstraction_free_impl @51

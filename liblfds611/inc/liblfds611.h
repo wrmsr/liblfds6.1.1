@@ -245,7 +245,10 @@
 
   void lfds611_queue_query( struct lfds611_queue_state *qs, enum lfds611_queue_query_type query_type, void *query_input, void *query_output );
 
-
+  /***** public extension prototypes *****/
+  struct lfds611_freelist_state *lfds611_queue_freelist_new( lfds611_atom_t number_elements, lfds611_atom_t number_queues );
+  int lfds611_queue_new_with_freelist( struct lfds611_queue_state **qs, lfds611_atom_t number_elements, struct lfds611_freelist_state *fs );
+  void lfds611_queue_delete_with_freelist( struct lfds611_queue_state *qs, void (*user_data_delete_function)(void *user_data, void *user_state), void *user_state, lfds611_atom_t delete_freelist );
 
 
 

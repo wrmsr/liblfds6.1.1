@@ -1,6 +1,10 @@
 #include "lfds611_abstraction_internal_wrapper.h"
 
 
+typedef void (*free_impl)(void *p);
+free_impl lfds611_abstraction_free_impl = (free_impl) free;
+
+
 
 
 
@@ -14,7 +18,7 @@
 
   void lfds611_abstraction_free( void *memory )
   {
-    free( memory );
+    lfds611_abstraction_free_impl( memory );
 
     return;
   }
